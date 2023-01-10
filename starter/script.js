@@ -1,53 +1,73 @@
 // Array of special characters to be included in password
-var specialCharacters = [  '@',  '%',  '+',  '\\',  '/',  "'",  '!',  '#',  '$',  '^',  '?',  ':',  ',',  ')',  '(',  '}',  '{',  ']',  '[',  '~',  '-',  '_',  '.'];
+var specialCharacters  = [  '@',  '%',  '+',  '\\',  '/',  "'",  '!',  '#',  '$',  '^',  '?',  ':',  ',',  ')',  '(',  '}',  '{',  ']',  '[',  '~',  '-',  '_',  '.'];
 
 // Array of numeric characters to be included in password
-var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var numbers  = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // Array of lowercase characters to be included in password
-var lowerCasedCharacters = [   'a',  'b',  'c',  'd',  'e',  'f',  'g',  'h',  'i',  'j',  'k',  'l',  'm',  'n',  'o',  'p',  'q',  'r',  's',  't',  'u',  'v',  'w',  'x',  'y',  'z'];
+var lowerCase  = [   'a',  'b',  'c',  'd',  'e',  'f',  'g',  'h',  'i',  'j',  'k',  'l',  'm',  'n',  'o',  'p',  'q',  'r',  's',  't',  'u',  'v',  'w',  'x',  'y',  'z'];
 
 // Array of uppercase characters to be included in password
-var upperCasedCharacters = [  'A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'];
+var upperCase  = [  'A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'];
 
 
-
-// Function to prompt user for password options
-function getPasswordOptions() {
-
-}
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-
-var passwordLength = 12;
-var password ="";
-
-for (var i = 0; i <= passwordLength; i++){
-  var randomNumber = Math.floor(Math.random() * specialCharacters.length);
-  password +=
-}
-}
-
-// Function to generate password with user input
+// User prompts
 function generatePassword() {
 
+    var firstQuestion = confirm("Do you want uppercase characters in your password?");
+  
+    var secondQuestion = confirm("Do you want lowercase characters in your password?");
+     
+    var thirdQuestion = confirm("Do you want numbers in your password?");
+  
+    var fourthQuestion = confirm("Do you want special characters in your password?");
+  
+    var fifthQuestion = prompt("Please choose a length for your password. Recommended between 10 and 64 characters in length");
+    
 
-let length = prompt("How long would you like your password length? Choose from a number from 10 - 64 ")
+    if (!firstQuestion && !secondQuestion && !thirdQuestion && !fourthQuestion && (fifthQuestion < 10 || fifthQuestion > 64)) {
+      alert("you must choose at least one parameter!");
+      alert("Password must be between 8 and 128 characters!");
+      writePassword();
+      return;
+    } else if (!firstQuestion && !secondQuestion && !thirdQuestion && !fourthQuestion) {
+      alert("you must choose at least one parameter!");
+      writePassword();
+      return;
+    } else if (fifthQuestion < 10 || fifthQuestion > 64) {
+      alert("Password must be between 10 and 64 characters!");
+      writePassword();
+      return;
+    }
+  
+ 
+    var userChoice = [];
 
-let lowerCase = prompt("Do you want to include Lowercase");
+    var passwordFinal = "";
+  
+//concatenate user input into random password
+    if (firstQuestion) {
+      userChoice = userChoice.concat(upperCase);
+    
+    }
+    if (secondQuestion) {
+      userChoice = userChoice.concat(lowerCase);
+  
+    }
+    if (thirdQuestion) {
+      userChoice = userChoice.concat(numbers);
+    
+    }
+    if (fourthQuestion) {
+      userChoice = userChoice.concat(specialCharacters);
 
-let upperCase = prompt("Do you want to include Upercase");
-
-let numericalFigure = prompt("Do you want to include Numerical figure");
-
-alert("Okay so you want to include " +  specialCharacters + " and " +
- numericCharacters + " and " +  lowerCasedCharacters + " and " + upperCasedCharacters );
-
-
-
-
-}
+    }
+    for (var i = 0; i < fifthQuestion; i++) {
+      passwordFinal += userChoice[Math.floor(Math.random() * userChoice.length)];
+      console.log(passwordFinal);
+    }
+    return passwordFinal;
+  };
 
 
 
